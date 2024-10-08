@@ -1,0 +1,37 @@
+---
+- name: Deploy web servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600 # Consider the cache valid for 1 hour
+
+    - name: Install web server
+      package:
+        name: nginx
+        state: present
+
+    - name: Start and enable nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Create hw1.html for Red Team
+      copy:
+        content: "Red Team"
+        dest: /var/www/html/hw1.html
+      when: "'red' in group_names"
+
+    - name: Create hw1.html for Blue Team
+      copy:
+        content: "Blue Team"
+        dest: /var/www/html/hw1.html
+      when: "'blue' in group_names"
+
+    - name: Install curl
+      package:
+        name: curl
+        state: present
