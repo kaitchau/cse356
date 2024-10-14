@@ -1,3 +1,15 @@
+Grading completed. Score: 2
+
+Successfully SSHed into Ansible host = 0.2pts
+Running Ansible playbook...
+10 instances responding via Ansible = 1pt
+Found HTTP responses from 10 hosts = 0.4pts
+Team colors match up = 0.4pts 
+ Reds:  130.245.136.148/hw1.html, 130.245.136.205/hw1.html, 130.245.136.234/hw1.html, 130.245.136.26/hw1.html, 130.245.136.112/hw1.html 
+ Blues:  130.245.136.187/hw1.html, 130.245.136.198/hw1.html, 130.245.136.217/hw1.html, 130.245.136.79/hw1.html, 130.245.136.207/hw1.html
+
+---
+
 root@kaitlyn-hw4:~# sudo nano /root/deploy/deploy.yaml
 root@kaitlyn-hw4:~# echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPw6yxRemIWUyepSodu5QCx5aDXh+dgodVFD0qCY1CQ1 root@master-server" >> ~/.ssh/authorized_keys
 root@kaitlyn-hw4:~# ansible-playbook /root/deploy/deploy.yaml
