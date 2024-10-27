@@ -15,10 +15,10 @@ via your-website.com:port)
 
 - Update pkg manager + install Java
 
-#$ sudo apt-get update
-#$ sudo apt-get install openjdk-11-jdk -y
-#$ update-alternatives --config java
-#$ echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" | sudo tee -a /etc/environment
+# $ sudo apt-get update
+# $ sudo apt-get install openjdk-11-jdk -y
+# $ update-alternatives --config java
+# $ echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" | sudo tee -a /etc/environment
 source /etc/environment
 
 - Install Elasticsearch (for Ubuntu)
