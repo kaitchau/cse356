@@ -13,36 +13,20 @@ via your-website.com:port)
 
 -----------------------------------------------------------------------
 
+- Install Docker
+
+https://docs.docker.com/engine/install/ubuntu/
+
+
+- Install Elasticsearch / kibana version 8.15 w/ docker
+
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 
-- Update pkg manager + install Java
 
-$ sudo apt-get update 
-<br/>$ sudo apt-get install openjdk-11-jdk -y
-<br/>$ update-alternatives --config java
-<br/>$ echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" | sudo tee -a /etc/environment
-source /etc/environment
+- $ docker run --name es01 --net elastic -p 9200:9200 -e "discovery.type=single-node" -e "xpack.security.enabled=false" -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:8.15.3
 
-- Install Elasticsearch (for Ubuntu)
-https://www.elastic.co/guide/en/elasticsearch/reference/8.15/deb.html
+- $ docker run --name kib01 --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:8.15.3s
 
-$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-<br/>$ sudo apt-get install apt-transport-https
-<br/>$  echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
-<br/>$ sudo apt-get update && sudo apt-get install 
-
-
-- Install Kibana (after Elasticsearch)
-https://www.elastic.co/guide/en/kibana/6.8/deb.html
-
-
-$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-<br/>$ sudo apt-get install apt-transport-https
-<br/>$ echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
-<br/>$ sudo apt-get update && sudo apt-get install kibana
-
-
-- Start Elasticsearch with $ sudo systemctl start elasticsearch
 - Open new ubunti linux wsl terminal to use, since the elasticsearch is running on the other tab of wsl. Create the index with cmd $ curl -X PUT "localhost:9200/hw7?pretty"
 - Download the movies json to the cloud linux server w/ cmd $ wget -O ./movies.json https://grading.cse356.compas.cs.stonybrook.edu/hw7/movies.json , where ./movies.json is the file path u want.
 - Ensure logstash is installed w/ cmd $ sudo apt-get install logstash
@@ -55,6 +39,11 @@ $ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key a
 - $ sudo apt install python3
 - $ sudo apt install pip
 - $ sudo apt install python3-pip
-
 - $ pip install elasticsearch
 <br/> run the movies.py script w/ $ python3 movies.py
+
+## Configure Kabana to the below address.
+- http://130.245.136.153:9200
+
+### to make sure that the script properly indexed the json
+- $ curl -X GET "http://localhost:9200/cse356/_search?pretty"
